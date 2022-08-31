@@ -44,9 +44,6 @@ int main(){
             circle_y -= 10;
         }
 
-        // if(circle_x >= 800 || circle_y >= 800){
-        //     return 0;
-        // }
         //Game logic ends
         EndDrawing();
     }
