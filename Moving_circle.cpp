@@ -7,7 +7,7 @@ int main(){
 
     SetTargetFPS(60);
     int circle_x_position = 300;
-    int circle_y_position = 300;
+    int circle_y_position = 600;
     int circle_radius = 40;
     int circle_increment = 5;
 
@@ -16,6 +16,7 @@ int main(){
     int rectangle_y_position = 0;
     int rectangle_width = 50;
     int rectangle_height = 300;
+
     
     //Circle Boundries
     int circle_top_edge = circle_y_position - circle_radius;
@@ -26,8 +27,8 @@ int main(){
     //Rectangle Boundries
     int rectangle_top_edge = rectangle_y_position;
     int rectangle_bottom_edge = rectangle_y_position + rectangle_height;
-    int rectangle_left_edge = rectangle_x_position - (rectangle_width/2);
-    int rectangle_right_edge = rectangle_x_position + (rectangle_width/2);
+    int rectangle_left_edge = rectangle_x_position;
+    int rectangle_right_edge = rectangle_x_position + rectangle_width;
 
 
     int direction = 4;
@@ -46,7 +47,7 @@ int main(){
 
         
         if(collision_with_axe){
-            DrawText("Game Over!", 400, 200, 20, RED);
+            DrawText("Game Over!", 300, 400, 60, RED);
         }
         else{
             //Game logic begins
@@ -62,8 +63,8 @@ int main(){
         //updating rectangle boundaries
      rectangle_top_edge = rectangle_y_position;
      rectangle_bottom_edge = rectangle_y_position + rectangle_height;
-     rectangle_left_edge = rectangle_x_position - (rectangle_width/2);
-     rectangle_right_edge = rectangle_x_position + (rectangle_width/2);
+     rectangle_left_edge = rectangle_x_position;
+     rectangle_right_edge = rectangle_x_position + rectangle_width;
         //updating collision_with_axe boundaries
         collision_with_axe = (rectangle_bottom_edge>=circle_top_edge)&&
                               (rectangle_top_edge<=circle_bottom_edge)&&
