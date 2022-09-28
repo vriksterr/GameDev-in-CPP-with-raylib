@@ -12,8 +12,8 @@ int main(){
     int circle_increment = 5;
 
     //in game x and y axis starting point is the top left corner
-    int rectangle_x = 600;
-    int rectangle_y = 0;
+    int rectangle_x_position = 600;
+    int rectangle_y_position = 0;
     int rectangle_width = 50;
     int rectangle_height = 300;
     
@@ -24,14 +24,18 @@ int main(){
     int circle_right_edge = circle_x_position + circle_radius;
 
     //Rectangle Boundries
-    int rectangle_top_edge = rectangle_y - rectangle_height;
-    int rectangle_bottom_edge = rectangle_y + rectangle_height;
-    int rectangle_left_edge = rectangle_x - rectangle_width;
-    int rectangle_right_edge = rectangle_x + rectangle_width;
+    int rectangle_top_edge = rectangle_y_position;
+    int rectangle_bottom_edge = rectangle_y_position + rectangle_height;
+    int rectangle_left_edge = rectangle_x_position - (rectangle_width/2);
+    int rectangle_right_edge = rectangle_x_position + (rectangle_width/2);
+
 
     int direction = 4;
 
-    bool collision_with_axe {false};
+    bool collision_with_axe = (rectangle_bottom_edge>=circle_top_edge)&&
+                              (rectangle_top_edge<=circle_bottom_edge)&&
+                              (rectangle_right_edge>=circle_left_edge)&&
+                              (rectangle_left_edge<=circle_right_edge);
 
     // once the while loops starts the program keeps looping within while loop until the game is closed
 
@@ -47,14 +51,35 @@ int main(){
         else{
             //Game logic begins
             DrawCircle(circle_x_position,circle_y_position,circle_radius,BLUE);
-            DrawRectangle(rectangle_x, rectangle_y, rectangle_width, rectangle_height, RED);         //DrwawRectangle(distance_x,distance_y,width,height,color)
+            DrawRectangle(rectangle_x_position, rectangle_y_position, rectangle_width, rectangle_height, RED);         //DrwawRectangle(distance_x,distance_y,width,height,color)
+            
+
+        //updating cicle boundaries
+        circle_top_edge = circle_y_position - circle_radius;
+        circle_bottom_edge = circle_y_position + circle_radius;
+        circle_left_edge = circle_x_position - circle_radius;
+        circle_right_edge = circle_x_position + circle_radius;
+        //updating rectangle boundaries
+     rectangle_top_edge = rectangle_y_position;
+     rectangle_bottom_edge = rectangle_y_position + rectangle_height;
+     rectangle_left_edge = rectangle_x_position - (rectangle_width/2);
+     rectangle_right_edge = rectangle_x_position + (rectangle_width/2);
+        //updating collision_with_axe boundaries
+        collision_with_axe = (rectangle_bottom_edge>=circle_top_edge)&&
+                              (rectangle_top_edge<=circle_bottom_edge)&&
+                              (rectangle_right_edge>=circle_left_edge)&&
+                              (rectangle_left_edge<=circle_right_edge);
+
+
+
+
             
             
             //move the rectangle
-            rectangle_y += direction;
+            rectangle_y_position += direction;
             //rectangle edges
-            int rectangle_edge_top = rectangle_y;
-            int rectangle_edge_bottom = rectangle_y + rectangle_height;
+            int rectangle_edge_top = rectangle_y_position;
+            int rectangle_edge_bottom = rectangle_y_position + rectangle_height;
             // int rectangle_edge_left = rectangle_x;
             // int rectangle_edge_right = rectangle_y + rectangle_width;
             
