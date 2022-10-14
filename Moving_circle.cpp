@@ -1,4 +1,4 @@
-#include"raylib.h"
+#include"C:\raylib\raylib\src\raylib.h"
 
 int main(){
     
@@ -47,7 +47,7 @@ int main(){
 
         
         if(collision_with_axe){
-            DrawText("Game Over!", 300, 400, 60, RED);
+            DrawText("Game Over!", 250, 350, 60, RED);
         }
         else{
             //Game logic begins
@@ -60,47 +60,44 @@ int main(){
         circle_bottom_edge = circle_y_position + circle_radius;
         circle_left_edge = circle_x_position - circle_radius;
         circle_right_edge = circle_x_position + circle_radius;
+        
         //updating rectangle boundaries
-     rectangle_top_edge = rectangle_y_position;
-     rectangle_bottom_edge = rectangle_y_position + rectangle_height;
-     rectangle_left_edge = rectangle_x_position;
-     rectangle_right_edge = rectangle_x_position + rectangle_width;
+        rectangle_top_edge = rectangle_y_position;
+        rectangle_bottom_edge = rectangle_y_position + rectangle_height;
+        rectangle_left_edge = rectangle_x_position;
+        rectangle_right_edge = rectangle_x_position + rectangle_width;
+        
         //updating collision_with_axe boundaries
         collision_with_axe = (rectangle_bottom_edge>=circle_top_edge)&&
                               (rectangle_top_edge<=circle_bottom_edge)&&
                               (rectangle_right_edge>=circle_left_edge)&&
                               (rectangle_left_edge<=circle_right_edge);
 
+        //move the rectangle
+        rectangle_y_position += direction;
+        //rectangle edges
+        int rectangle_edge_top = rectangle_y_position;
+        int rectangle_edge_bottom = rectangle_y_position + rectangle_height;
+        // int rectangle_edge_left = rectangle_x;
+        // int rectangle_edge_right = rectangle_y + rectangle_width;
+        
+        if( rectangle_edge_bottom >= Window_Height || rectangle_edge_top <= 0){   // This function basically changes the +ve to -ve and -ve to +ve after eveytime it reaches the 800 or 0, so direction becomes (-4) and after it reaches top it becomes (+4) and this is how the box keeps moving
+            direction = -direction;
+        }
 
-
-
-            
-            
-            //move the rectangle
-            rectangle_y_position += direction;
-            //rectangle edges
-            int rectangle_edge_top = rectangle_y_position;
-            int rectangle_edge_bottom = rectangle_y_position + rectangle_height;
-            // int rectangle_edge_left = rectangle_x;
-            // int rectangle_edge_right = rectangle_y + rectangle_width;
-            
-            if( rectangle_edge_bottom >= Window_Height || rectangle_edge_top <= 0){   // This function basically changes the +ve to -ve and -ve to +ve after eveytime it reaches the 800 or 0, so direction becomes (-4) and after it reaches top it becomes (+4) and this is how the box keeps moving
-                direction = -direction;
-            }
-
-            //controlling the circle position
-            if(IsKeyDown(KEY_D) && circle_x_position+circle_radius <= 800){
-                circle_x_position += circle_increment;
-            }
-            if(IsKeyDown(KEY_A) && circle_x_position-circle_radius >= 0){
-                circle_x_position -= circle_increment;
-            }
-            if(IsKeyDown(KEY_S) && circle_y_position+circle_radius <= 800){
-                circle_y_position += circle_increment;
-            }
-            if(IsKeyDown(KEY_W) && circle_y_position-circle_radius >= 0){
-                circle_y_position -= circle_increment;
-            }
+        //controlling the circle position
+        if(IsKeyDown(KEY_D) && circle_x_position+circle_radius <= 800){
+            circle_x_position += circle_increment;
+        }
+        if(IsKeyDown(KEY_A) && circle_x_position-circle_radius >= 0){
+            circle_x_position -= circle_increment;
+        }
+        if(IsKeyDown(KEY_S) && circle_y_position+circle_radius <= 800){
+            circle_y_position += circle_increment;
+        }
+        if(IsKeyDown(KEY_W) && circle_y_position-circle_radius >= 0){
+            circle_y_position -= circle_increment;
+        }
 
             //Game logic ends
         }
